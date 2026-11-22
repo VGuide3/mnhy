@@ -18,6 +18,7 @@
   ],
   "scripts": {
     "build": "tsc -b",
+    "demo": "node scripts/demo-native-transfer.mjs",
     "clean": "tsc -b --clean"
   },
   "dependencies": {

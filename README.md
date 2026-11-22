@@ -59,10 +59,12 @@ pnpm --filter @web3-forge/shared build
 ### `@web3-forge/tx-engine` (`packages/tx-engine`)
 
 Canonical transaction engine: strategy registration and the validate, simulate, authorize,
-execute, and confirm lifecycle. Depends on `shared`.
+execute, and confirm lifecycle. Depends on `shared`. See
+[`packages/tx-engine/README.md`](packages/tx-engine/README.md) for engine and strategy usage.
 
 ```bash
 pnpm --filter @web3-forge/tx-engine build
+pnpm --filter @web3-forge/tx-engine demo   # full native transfer flow
 ```
 
 ### `@web3-forge/runtime` (`packages/runtime`)
