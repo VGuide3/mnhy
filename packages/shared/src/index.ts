@@ -7,4 +7,5 @@ export const PRODUCT_NAME = 'Web3 Forge';
 
 export * from './errors.js';
 export * from './events.js';
+export * from './hash.js';
 export * from './transaction.js';

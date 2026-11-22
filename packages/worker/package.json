@@ -2,7 +2,7 @@
   "name": "@web3-forge/worker",
   "version": "0.1.0",
   "private": true,
-  "description": "Build worker that produces esbuild artifacts and signed manifests.",
+  "description": "Build worker that produces esbuild artifacts and integrity manifests.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -15,13 +15,18 @@
   "files": [
     "dist"
   ],
+  "bin": {
+    "web3-forge-worker": "./dist/worker.js"
+  },
   "scripts": {
     "build": "tsc -b",
     "dev": "node --watch dist/server.js",
     "start": "node dist/server.js",
+    "worker": "node dist/worker.js",
     "clean": "tsc -b --clean"
   },
   "dependencies": {
-    "@web3-forge/shared": "workspace:*"
+    "@web3-forge/shared": "workspace:*",
+    "esbuild": "^0.28.2"
   }
 }

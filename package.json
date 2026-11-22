@@ -22,7 +22,8 @@
     "dev": "tsc -b && node scripts/dev.mjs",
     "dev:api": "node --watch packages/api/dist/server.js",
     "dev:web": "node --watch packages/web/dist/server.js",
-    "dev:worker": "node --watch packages/worker/dist/server.js"
+    "dev:worker": "node --watch packages/worker/dist/server.js",
+    "worker:example": "node packages/worker/dist/worker.js --project examples/simple-project --out artifacts/simple-project"
   },
   "pnpm": {
     "overrides": {

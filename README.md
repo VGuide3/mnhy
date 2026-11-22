@@ -21,17 +21,18 @@ pnpm format:check   # Prettier verification
 
 ## Root scripts
 
-| Script            | Description                                             |
-| ----------------- | ------------------------------------------------------- |
-| `pnpm bootstrap`  | Install workspace dependencies                          |
-| `pnpm build`      | Build every package through the composite project graph |
-| `pnpm typecheck`  | Build sources and type-check all tests                  |
-| `pnpm test`       | Run every package test once with Vitest                 |
-| `pnpm test:watch` | Run Vitest in watch mode                                |
-| `pnpm lint`       | Lint TypeScript, JavaScript, and config files           |
-| `pnpm format`     | Format the repository with Prettier                     |
-| `pnpm dev`        | Build, then start API, web, and worker in watch mode    |
-| `pnpm clean`      | Remove TypeScript build output                          |
+| Script                | Description                                             |
+| --------------------- | ------------------------------------------------------- |
+| `pnpm bootstrap`      | Install workspace dependencies                          |
+| `pnpm build`          | Build every package through the composite project graph |
+| `pnpm typecheck`      | Build sources and type-check all tests                  |
+| `pnpm test`           | Run every package test once with Vitest                 |
+| `pnpm test:watch`     | Run Vitest in watch mode                                |
+| `pnpm lint`           | Lint TypeScript, JavaScript, and config files           |
+| `pnpm format`         | Format the repository with Prettier                     |
+| `pnpm dev`            | Build, then start API, web, and worker in watch mode    |
+| `pnpm worker:example` | Build `examples/simple-project` with the worker CLI     |
+| `pnpm clean`          | Remove TypeScript build output                          |
 
 ## Development servers
 
@@ -50,7 +51,8 @@ The individual commands expect `pnpm build` to have run first. Override a port w
 
 ### `@web3-forge/shared` (`packages/shared`)
 
-Shared types, error codes, and utilities used by every other package. It has no dependencies.
+Shared types, error codes, SHA-256 hashing, and utilities used by every other package. It has no
+dependencies.
 
 ```bash
 pnpm --filter @web3-forge/shared build
@@ -78,21 +80,27 @@ pnpm --filter @web3-forge/runtime build
 
 ### `@web3-forge/api` (`packages/api`)
 
-Orchestration API for projects, builds, preview sessions, and auth. Depends on `shared`.
+Fastify orchestration API for health, transaction validation and simulation, and in-memory
+projects/builds. Depends on `shared` and `tx-engine`. See
+[`packages/api/README.md`](packages/api/README.md) for endpoint examples.
 
 ```bash
 pnpm --filter @web3-forge/api build
 pnpm --filter @web3-forge/api dev     # http://localhost:3001
+
+curl localhost:3001/health
 ```
 
 ### `@web3-forge/worker` (`packages/worker`)
 
-Build worker that will run the esbuild pipeline and produce signed manifests. Depends on
-`shared`.
+esbuild build worker that produces IIFE and ESM bundles, source maps, SHA-256 checksums, and
+`manifest.json`. Depends on `shared`. See [`packages/worker/README.md`](packages/worker/README.md)
+for the CLI and manifest schema.
 
 ```bash
 pnpm --filter @web3-forge/worker build
-pnpm --filter @web3-forge/worker dev  # http://localhost:3002
+pnpm --filter @web3-forge/worker dev  # health server on http://localhost:3002
+pnpm worker:example                   # build examples/simple-project into artifacts/
 ```
 
 ### `@web3-forge/web` (`packages/web`)
@@ -129,7 +137,8 @@ packages/worker            Build worker
 packages/web               Dashboard UI
 packages/runtime           WebChunk runtime
 packages/tx-engine         Transaction engine
-packages/shared            Shared types and utilities
+packages/shared            Shared types, errors, and hashing
+examples/simple-project    Sample project for the worker POC
 scripts/dev.mjs            Runs the three dev servers and tsc watch
 ```
 

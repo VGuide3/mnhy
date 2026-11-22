@@ -1,19 +1,26 @@
-import { createServer } from 'node:http';
-import { PACKAGE_DESCRIPTION, PACKAGE_NAME } from './index.js';
+import { createApp } from './app.js';
+import { PACKAGE_NAME } from './index.js';
 
 const port = Number.parseInt(process.env.PORT ?? '3001', 10);
+const host = process.env.HOST ?? '0.0.0.0';
 
-const server = createServer((request, response) => {
-  if (request.url === '/health') {
-    response.writeHead(200, { 'content-type': 'application/json' });
-    response.end(JSON.stringify({ status: 'ok', service: PACKAGE_NAME }));
-    return;
-  }
+if (!Number.isInteger(port) || port <= 0) {
+  throw new Error(`Invalid PORT value: ${process.env.PORT}`);
+}
 
-  response.writeHead(200, { 'content-type': 'application/json' });
-  response.end(JSON.stringify({ name: PACKAGE_NAME, description: PACKAGE_DESCRIPTION }));
-});
+const app = createApp({ logger: true });
 
-server.listen(port, () => {
-  console.log(`[${PACKAGE_NAME}] listening on http://localhost:${port}`);
-});
+for (const signal of ['SIGINT', 'SIGTERM'] as const) {
+  process.on(signal, async () => {
+    await app.close();
+    process.exit(0);
+  });
+}
+
+try {
+  await app.listen({ port, host });
+  console.log(`[${PACKAGE_NAME}] listening on http://${host}:${port}`);
+} catch (error) {
+  app.log.error(error);
+  process.exitCode = 1;
+}
