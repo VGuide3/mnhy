@@ -1,0 +1,19 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "composite": false,
+    "noEmit": true,
+    "rootDir": ".",
+    "baseUrl": ".",
+    "types": ["node"],
+    "paths": {
+      "@web3-forge/shared": ["packages/shared/src/index.ts"],
+      "@web3-forge/tx-engine": ["packages/tx-engine/src/index.ts"],
+      "@web3-forge/runtime": ["packages/runtime/src/index.ts"],
+      "@web3-forge/api": ["packages/api/src/index.ts"],
+      "@web3-forge/worker": ["packages/worker/src/index.ts"],
+      "@web3-forge/web": ["packages/web/src/index.ts"]
+    }
+  },
+  "include": ["packages/*/src/**/*.test.ts", "vitest.config.ts"]
+}

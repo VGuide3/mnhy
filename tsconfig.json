@@ -1,0 +1,11 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/shared" },
+    { "path": "packages/tx-engine" },
+    { "path": "packages/runtime" },
+    { "path": "packages/api" },
+    { "path": "packages/worker" },
+    { "path": "packages/web" }
+  ]
+}
