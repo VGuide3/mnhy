@@ -1,0 +1,28 @@
+{
+  "name": "@web3-forge/web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Desktop-first Web3 Forge dashboard and transaction studio UI.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "public"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "node --watch dist/server.js",
+    "start": "node dist/server.js",
+    "clean": "tsc -b --clean"
+  },
+  "dependencies": {
+    "@web3-forge/runtime": "workspace:*"
+  }
+}

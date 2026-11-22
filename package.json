@@ -1,0 +1,44 @@
+{
+  "name": "web3-forge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Web3 Forge monorepo: transaction engineering and compilation studio.",
+  "type": "module",
+  "packageManager": "pnpm@9.15.9",
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "scripts": {
+    "bootstrap": "pnpm install",
+    "build": "tsc -b",
+    "clean": "tsc -b --clean",
+    "typecheck": "tsc -b && tsc -p tsconfig.tests.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "dev": "tsc -b && node scripts/dev.mjs",
+    "dev:api": "node --watch packages/api/dist/server.js",
+    "dev:web": "node --watch packages/web/dist/server.js",
+    "dev:worker": "node --watch packages/worker/dist/server.js"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "6.4.6"
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^18.19.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.14.0",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.19.0",
+    "vite": "^6.3.5",
+    "vitest": "^3.0.0"
+  }
+}

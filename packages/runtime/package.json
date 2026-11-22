@@ -1,0 +1,27 @@
+{
+  "name": "@web3-forge/runtime",
+  "version": "0.1.0",
+  "private": true,
+  "description": "WebChunk runtime shared by preview and exported artifacts.",
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "tsc -b --clean"
+  },
+  "dependencies": {
+    "@web3-forge/shared": "workspace:*",
+    "@web3-forge/tx-engine": "workspace:*"
+  }
+}
